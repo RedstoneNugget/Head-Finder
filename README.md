@@ -1,0 +1,105 @@
+# Hugo SMP Pumpkin Finder
+
+![Minecraft 1.21.11](https://img.shields.io/badge/Minecraft-1.21.11-62B47A) ![Fabric](https://img.shields.io/badge/Loader-Fabric-DBD0B4) ![Java 21](https://img.shields.io/badge/Java-21-ED8B00) ![Client only](https://img.shields.io/badge/Umgebung-nur%20Client-5865F2) ![Lizenz MIT](https://img.shields.io/badge/Lizenz-MIT-blue)
+
+**Minecraft 1.21.11 · Fabric · Java 21 · nur Client** · von **redstone_nugget** · Mod-Name im Spiel: *Coole Socke 69*
+
+Findet die versteckten Event-Köpfe auf **Hugo SMP**: Jeder Kopf in den geladenen Chunks wird erkannt,
+mit einer farbigen Box durch Wände markiert und mit Entfernung beschriftet. Ein Pfeil oben am Bildschirm
+zeigt zum nächsten Kopf. Rechtsklick auf einen Kopf → gilt als gefunden und wird nicht mehr markiert.
+Der Fortschritt wird pro Server gespeichert.
+
+<p align="center">
+  <img src="docs/markierungen.png" width="49%" alt="Markierungen durch eine Wand, HUD mit Pfeil">
+  <img src="docs/200-koepfe.png" width="49%" alt="200 Köpfe von oben, Tracer zum nächsten">
+</p>
+<p align="center">
+  <img src="docs/liste.png" width="49%" alt="Liste aller entdeckten Köpfe (Taste K)">
+  <img src="docs/einstellungen.png" width="49%" alt="Einstellungen">
+</p>
+
+> **English:** Finds the hidden event heads on Hugo SMP. Every matching player head in loaded chunks gets a
+> box through walls, a distance label and an optional tracer; a HUD arrow points to the nearest one.
+> Right-click a head to mark it as found (it is hidden afterwards), reset any time. Progress is saved per server.
+
+> **Inoffiziell.** Nicht von Hugo SMP. Die Mod ist rein clientseitig, sendet keine eigenen Pakete und nutzt
+> nur Daten, die dein Client sowieso vom Server bekommt. Prüf trotzdem selbst die Regeln des Servers.
+
+## Download
+
+[**GitHub Releases**](https://github.com/RedstoneNugget/Hugo-SMP-Pumpkin-Finder/releases)
+
+## Installation
+
+1. [Fabric Loader](https://fabricmc.net/use/) (≥ 0.19) für Minecraft 1.21.11 installieren.
+2. [Fabric API](https://modrinth.com/mod/fabric-api) in den `mods`-Ordner legen.
+3. `coole-socke-69-1.0.0.jar` in den `mods`-Ordner legen.
+4. Optional: [Mod Menu](https://modrinth.com/mod/modmenu), dann sind die Einstellungen auch über die Mod-Liste erreichbar.
+
+## Bedienung
+
+| Taste / Aktion | Funktion |
+|---|---|
+| **K** | Liste aller entdeckten Köpfe: Koordinaten, Entfernung, gefunden ja/nein. Klick auf einen Eintrag = Ziel setzen, „Kopieren“ = Koordinaten in die Zwischenablage |
+| **Rechtsklick** auf einen Kopf | Als gefunden markieren, danach wird er nicht mehr angezeigt |
+| *(frei belegbar)* | Markierungen an/aus, Einstellungen öffnen |
+
+Oben am Bildschirm: **„Köpfe: X gefunden / Y entdeckt“**, darunter ein Pfeil mit Entfernung (und ▲/▼ für die
+Höhe) zum nächsten offenen Kopf bzw. zum gewählten Ziel.
+
+Ein Kopf gilt außerdem als gefunden, wenn er verschwindet (Block weg, während sein Chunk geladen ist).
+Köpfe außerhalb der geladenen Chunks können nicht erkannt werden. Einmal entdeckte Köpfe bleiben aber
+gespeichert und in der Liste, auch wenn du weit weg bist.
+
+### Befehle
+
+| Befehl | Funktion |
+|---|---|
+| `/headfinder list [anzahl]` | Nächste Köpfe im Chat (Koordinaten anklicken = kopieren) |
+| `/headfinder reset` | Alle wieder als **nicht gefunden** markieren (Positionen bleiben) |
+| `/headfinder reset all` | Alles vergessen, auch die Positionen |
+| `/headfinder toggle [esp\|tracer\|hud\|labels\|hidefound]` | Anzeige umschalten |
+| `/headfinder target nearest\|clear\|<x y z>` | Ziel für Tracer und Pfeil |
+| `/headfinder found <x y z>` / `unfound <x y z>` | Status von Hand setzen |
+| `/headfinder status`, `scan`, `reload`, `open` | Infos, neu scannen, Config neu laden, Liste öffnen |
+
+Kurzform: `/hf …`. Die Befehle laufen nur im Client und werden nie an den Server geschickt.
+
+## Erkennung
+
+Gesucht werden Spielerköpfe (`player_head` / `player_wall_head`, als Item am Boden oder im Item-Frame)
+mit diesem Profil:
+
+- Name `FindEventHead` **oder**
+- Textur `http://textures.minecraft.net/texture/3d8c1f399f9a74ce148300cb6fa79fbc13ba44f9a52c25ce9e452b49f5b40a10`
+
+Die Profil-UUID ist bei jedem Event-Kopf anders und wird deshalb standardmäßig **nicht** verglichen; jeder
+Kopf wird über Dimension + Blockposition identifiziert. Weitere Suchprofile (Name, Textur, optional UUIDs)
+lassen sich in den Einstellungen oder in `config/coole_socke_69/config.json` eintragen.
+
+Gescannt werden nur die Block-Entities der Chunks (beim Laden und einmal pro Sekunde), nicht jeder Block.
+Getestet mit 200 Köpfen: Zeichnen ca. 0,04 ms pro Bild, Scan unter 0,5 ms pro Sekunde.
+
+## Einstellungen
+
+Markierungen, Labels, Tracer (aus / nächster / alle), HUD und dessen Abstand oben, gefundene ausblenden
+oder grün anzeigen, Farben (offen, gefunden, Ziel), Reichweite für Boxen und Labels, Label-Größe,
+Rechts-/Linksklick bzw. Verschwinden = gefunden, Items & Rahmen erkennen, UUID-Vergleich, Scan-Intervall
+und die Suchprofile.
+
+Dateien:
+- `config/coole_socke_69/config.json` – Einstellungen
+- `config/coole_socke_69/found/<server>.json` – entdeckte und gefundene Köpfe pro Server (Dimension pro Eintrag)
+
+## Selbst bauen
+
+```bash
+./gradlew build
+```
+
+Die fertige Datei liegt in `build/libs/`. Automatischer In-Game-Test (startet einen echten Client und
+Server, prüft u. a. 200 Köpfe): `./gradlew runClientGameTest`
+
+## Lizenz
+
+[MIT](LICENSE) · redstone_nugget

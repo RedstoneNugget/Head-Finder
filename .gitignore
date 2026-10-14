@@ -1,0 +1,25 @@
+# Gradle
+.gradle/
+build/
+out/
+
+# Loom / Minecraft
+run/
+remappedSrc/
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+bin/
+.classpath
+.project
+.settings/
+
+# Logs
+logs/
+*.log
+test-results/
+/coole-socke-69-*.jar

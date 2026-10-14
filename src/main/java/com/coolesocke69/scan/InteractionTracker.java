@@ -1,0 +1,96 @@
+package com.coolesocke69.scan;
+
+import com.coolesocke69.CooleSocke69Client;
+import com.coolesocke69.config.ModConfig;
+import com.coolesocke69.data.HeadEntry;
+import com.coolesocke69.data.HeadStore;
+import com.coolesocke69.detect.ProfileMatcher;
+import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
+import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import net.fabricmc.fabric.api.event.player.UseEntityCallback;
+import net.minecraft.block.entity.SkullBlockEntity;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.world.ClientWorld;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.decoration.ItemFrameEntity;
+import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
+/**
+ * Markiert Köpfe als gefunden, wenn der Spieler sie anklickt. Die Fabric-Callbacks werden auf dem Client
+ * aufgerufen, bevor das Klick-Paket gesendet wird; wir beobachten nur (immer PASS) und verändern nichts.
+ */
+public final class InteractionTracker {
+
+    private final ProfileMatcher matcher;
+    private final HeadStore store;
+
+    public InteractionTracker(ProfileMatcher matcher, HeadStore store) {
+        this.matcher = matcher;
+        this.store = store;
+    }
+
+    public void register() {
+        UseBlockCallback.EVENT.register((player, world, hand, hit) -> {
+            if (world.isClient() && CooleSocke69Client.config().foundOnRightClick) onBlock(world, hit.getBlockPos(), "Rechtsklick");
+            return ActionResult.PASS;
+        });
+        AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {
+            if (world.isClient() && CooleSocke69Client.config().foundOnLeftClick) onBlock(world, pos, "Linksklick");
+            return ActionResult.PASS;
+        });
+        UseEntityCallback.EVENT.register((player, world, hand, entity, hit) -> {
+            if (world.isClient() && CooleSocke69Client.config().foundOnRightClick) onEntity(world, entity, "Rechtsklick");
+            return ActionResult.PASS;
+        });
+        AttackEntityCallback.EVENT.register((player, world, hand, entity, hit) -> {
+            if (world.isClient() && CooleSocke69Client.config().foundOnLeftClick) onEntity(world, entity, "Linksklick");
+            return ActionResult.PASS;
+        });
+    }
+
+    private void onBlock(World world, BlockPos pos, String reason) {
+        if (!(world instanceof ClientWorld cw) || !store.isOpen()) return;
+        String dim = HeadScanner.dimension(cw);
+        HeadEntry e = store.get(HeadEntry.key(dim, pos, HeadEntry.Kind.BLOCK));
+        if (e == null) {
+            // Noch nicht gescannt (z. B. gerade erst geladen) → direkt prüfen
+            if (!(world.getBlockEntity(pos) instanceof SkullBlockEntity skull)) return;
+            ProfileMatcher.Match m = matcher.match(skull.getOwner());
+            if (m == null) return;
+            store.discover(dim, pos, HeadEntry.Kind.BLOCK, m.profileName());
+            e = store.get(HeadEntry.key(dim, pos, HeadEntry.Kind.BLOCK));
+        }
+        markFound(e, reason);
+    }
+
+    private void onEntity(World world, Entity entity, String reason) {
+        if (!(world instanceof ClientWorld cw) || !store.isOpen()) return;
+        if (!(entity instanceof ItemFrameEntity frame)) return;
+        String dim = HeadScanner.dimension(cw);
+        HeadEntry e = store.get(HeadEntry.key(dim, frame.getBlockPos(), HeadEntry.Kind.FRAME));
+        if (e == null) {
+            ProfileMatcher.Match m = matcher.match(frame.getHeldItemStack());
+            if (m == null) return;
+            store.discover(dim, frame.getBlockPos(), HeadEntry.Kind.FRAME, m.profileName());
+            e = store.get(HeadEntry.key(dim, frame.getBlockPos(), HeadEntry.Kind.FRAME));
+        }
+        markFound(e, reason);
+    }
+
+    private void markFound(HeadEntry e, String reason) {
+        if (e == null || e.found) return;
+        store.setFound(e, true, reason);
+        ModConfig cfg = CooleSocke69Client.config();
+        MinecraftClient mc = MinecraftClient.getInstance();
+        if (mc.inGameHud != null) {
+            String hint = cfg.hideFound ? " – wird nicht mehr markiert" : "";
+            mc.inGameHud.setOverlayMessage(Text.literal("Kopf gefunden (" + store.countFound() + "/" + store.countDiscovered() + ")" + hint)
+                    .formatted(Formatting.GREEN), false);
+        }
+    }
+}

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "coole_socke_69",
+  "version": "${version}",
+  "name": "Coole Socke 69",
+  "description": "Findet versteckte Event-Köpfe (Spielerköpfe mit bestimmtem Profil) in den geladenen Chunks, markiert sie durch Wände, merkt sich gefundene Köpfe pro Server und zeigt den Weg zum nächsten. Rein clientseitig.",
+  "authors": ["redstone_nugget"],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["com.coolesocke69.CooleSocke69Client"],
+    "modmenu": ["com.coolesocke69.compat.ModMenuIntegration"]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.0",
+    "minecraft": "~1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "modmenu": "*"
+  }
+}
