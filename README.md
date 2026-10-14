@@ -1,6 +1,6 @@
 # Hugo SMP Pumpkin Finder
 
-![Minecraft 1.21.11](https://img.shields.io/badge/Minecraft-1.21.11-62B47A) ![Fabric](https://img.shields.io/badge/Loader-Fabric-DBD0B4) ![Java 21](https://img.shields.io/badge/Java-21-ED8B00) ![Client only](https://img.shields.io/badge/Umgebung-nur%20Client-5865F2) ![Lizenz MIT](https://img.shields.io/badge/Lizenz-MIT-blue)
+![Minecraft 1.21.11](https://img.shields.io/badge/Minecraft-1.21.11-62B47A) ![Fabric](https://img.shields.io/badge/Loader-Fabric-DBD0B4) ![Java 21](https://img.shields.io/badge/Java-21-ED8B00) ![Nur Client](https://img.shields.io/badge/Umgebung-nur%20Client-5865F2) ![Lizenz MIT](https://img.shields.io/badge/Lizenz-MIT-blue)
 
 **Minecraft 1.21.11 · Fabric · Java 21 · nur Client** · von **redstone_nugget** · Mod-Name im Spiel: *Coole Socke 69*
 
@@ -16,10 +16,6 @@ Koordinaten in einer Liste, markiert sie und führt dich per Pfeil hin. Gefunden
   <img src="docs/markierungen.png" width="49%" alt="Markierungen und Pfeil zum nächsten Kopf">
   <img src="docs/einstellungen.png" width="49%" alt="Einstellungen">
 </p>
-
-> **English:** Helps you find the event heads on Hugo SMP: detects them in loaded chunks, lists their
-> coordinates, marks them and guides you there with an arrow. Right-click a head to tick it off (it is hidden
-> afterwards), reset any time. Progress is saved per server.
 
 > **Inoffiziell.** Nicht von Hugo SMP. Die Mod ist rein clientseitig, sendet keine eigenen Pakete und nutzt
 > nur Daten, die dein Client sowieso vom Server bekommt. Prüf trotzdem selbst die Regeln des Servers.

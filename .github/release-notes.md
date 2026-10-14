@@ -6,5 +6,3 @@ Hilft beim Event-Köpfe-Suchen auf Hugo SMP: erkennt die Event-Köpfe in geladen
 1. [Fabric Loader](https://fabricmc.net/use/) für 1.21.11 und die [Fabric API](https://modrinth.com/mod/fabric-api) installieren
 2. `coole-socke-69-1.0.0.jar` in den `mods`-Ordner legen
 3. Am Spawn herumlaufen: Köpfe in geladenen Chunks landen automatisch in der Liste
-
-**English:** Helps you find the event heads on Hugo SMP: detects them in loaded chunks, lists their coordinates, marks them and guides you there with an arrow. Right-click a head to tick it off; reset with `/headfinder reset`. Unofficial, client-side only.
