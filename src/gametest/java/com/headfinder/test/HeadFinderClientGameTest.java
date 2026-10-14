@@ -6,6 +6,7 @@ import com.headfinder.data.HeadEntry;
 import com.headfinder.detect.ProfileMatcher;
 import com.headfinder.gui.ConfigScreen;
 import com.headfinder.gui.HeadListScreen;
+import com.headfinder.render.HeadRenderer;
 import com.headfinder.scan.HeadScanner;
 import net.fabricmc.fabric.api.client.gametest.v1.FabricClientGameTest;
 import net.fabricmc.fabric.api.client.gametest.v1.context.ClientGameTestContext;
@@ -51,6 +52,7 @@ public class HeadFinderClientGameTest implements FabricClientGameTest {
         unitChecks();
         if (phase("main")) mainPhase(context);
         if (phase("stress")) stressPhase(context);
+        if (phase("tracer")) tracerPhase(context);
         log("ALLE TESTS BESTANDEN");
     }
 
@@ -149,6 +151,48 @@ public class HeadFinderClientGameTest implements FabricClientGameTest {
     }
 
     // ---------------------------------------------------------------- Phase 2: 200 Köpfe (Event hat ~100)
+
+    // ---------------------------------------------------------------- Phase 3: Tracer beim Laufen (View Bobbing)
+
+    private void tracerPhase(ClientGameTestContext context) {
+        try (TestDedicatedServerContext server = context.worldBuilder().setUseConsistentSettings(true).createServer()) {
+            try (TestServerConnection connection = server.connect()) {
+                connection.getClientWorld().waitForChunksRender();
+                context.runOnClient(c -> {
+                    HeadFinderClient.store().resetAll();
+                    c.options.getBobView().setValue(true);
+                });
+                server.runCommand("gamemode survival @a");
+                server.runCommand("effect give @a minecraft:resistance infinite 255 true");
+                server.runCommand(setblock(new BlockPos(3, -60, 40), "minecraft:player_head", profile("FindEventHead", "[I;1,1,1,1]", URL)));
+                server.runCommand("tp @a 0.5 -60 0.5 facing 3.5 -59.5 40.5");
+                waitUntil(context, c -> HeadFinderClient.store().countDiscovered() >= 1, "Kopf für Tracer-Test entdeckt");
+
+                // Laufen (W gedrückt) und Abstand des Linienanfangs vom Fadenkreuz messen
+                context.getInput().holdKey(o -> o.forwardKey);
+                double maxNew = 0;
+                double maxOld = 0;
+                for (int i = 0; i < 30; i++) {
+                    context.waitTick();
+                    double[] d = context.computeOnClient(c -> {
+                        HeadRenderer.TracerDebug t = HeadRenderer.lastTracer;
+                        if (t == null) return new double[]{0, 0};
+                        int w = c.getWindow().getFramebufferWidth();
+                        int h = c.getWindow().getFramebufferHeight();
+                        return new double[]{t.pixelsFromCenter(t.from(), w, h), t.pixelsFromCenter(t.naiveFrom(), w, h)};
+                    });
+                    maxNew = Math.max(maxNew, d[0]);
+                    maxOld = Math.max(maxOld, d[1]);
+                    if (i == 12) context.takeScreenshot("20_tracer_beim_laufen_a");
+                    if (i == 21) context.takeScreenshot("21_tracer_beim_laufen_b");
+                }
+                context.getInput().releaseKey(o -> o.forwardKey);
+                log(String.format(java.util.Locale.ROOT, "Tracer-Anfang beim Laufen: neu max %.2f px vom Fadenkreuz, vorher (ohne Korrektur) max %.2f px", maxNew, maxOld));
+                check(maxOld > 2.0, "View Bobbing war im Test wirksam (alter Anfang wich ab)");
+                check(maxNew < 1.0, "neuer Linienanfang bleibt im Fadenkreuz (< 1 px)");
+            }
+        }
+    }
 
     private static final int STRESS_COUNT = 200;
 

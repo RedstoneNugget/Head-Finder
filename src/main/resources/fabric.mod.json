@@ -11,6 +11,7 @@
     "client": ["com.headfinder.HeadFinderClient"],
     "modmenu": ["com.headfinder.compat.ModMenuIntegration"]
   },
+  "mixins": ["head_finder.mixins.json"],
   "depends": {
     "fabricloader": ">=0.19.0",
     "minecraft": "~1.21.11",

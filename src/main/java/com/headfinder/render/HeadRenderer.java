@@ -21,6 +21,9 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.debug.gizmo.GizmoDrawing;
 import net.minecraft.world.debug.gizmo.TextGizmo;
 
+import org.joml.Matrix4f;
+import org.joml.Vector4f;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,8 +97,7 @@ public final class HeadRenderer {
                     tracerTo.clear();
                     tracerTo.add(target);
                 }
-                Vec3d look = Vec3d.fromPolar(camera.getPitch(), camera.getYaw());
-                Vec3d from = cam.add(look.multiply(0.6));
+                Vec3d from = crosshairPoint(ctx, camera, cam);
                 for (HeadEntry h : tracerTo) {
                     int color = (h == target && explicitTarget) ? targetColor : open;
                     float width = h == target ? 2.5f : 1.5f;
@@ -109,6 +111,58 @@ public final class HeadRenderer {
         lastRenderMicros = (System.nanoTime() - t0) / 1000;
         maxRenderMicros = Math.max(maxRenderMicros, lastRenderMicros);
     }
+
+    /** Vom Mixin gesetzt: echte Projektionsmatrix dieses Bildes (inkl. Kamera-Wackeln). */
+    private static final Matrix4f FRAME_PROJECTION = new Matrix4f();
+    private static boolean hasFrameProjection;
+
+    public static void setFrameProjection(Matrix4f projection) {
+        FRAME_PROJECTION.set(projection);
+        hasFrameProjection = true;
+    }
+
+    /**
+     * Punkt 0,6 Blöcke vor der Kamera, der im Bild genau in der Bildschirmmitte (Fadenkreuz) liegt.
+     *
+     * Ein einfaches "Kamera + Blickrichtung" reicht nicht: Beim Laufen (View Bobbing) und bei Schaden wird
+     * die Ansicht zusätzlich verschoben/gekippt, dann wandert der Linienanfang vom Fadenkreuz weg. Deshalb wird
+     * die Bildschirmmitte mit der echten Matrix (Projektion · Kamera-Drehung) zurück in die Welt gerechnet.
+     */
+    private static Vec3d crosshairPoint(WorldExtractionContext ctx, Camera camera, Vec3d cam) {
+        Vec3d look = Vec3d.fromPolar(camera.getPitch(), camera.getYaw());
+        Vec3d fallback = cam.add(look.multiply(0.6));
+        if (!hasFrameProjection) return fallback;
+        Matrix4f inv = new Matrix4f(FRAME_PROJECTION).mul(ctx.viewMatrix()).invert();
+        Vector4f a = inv.transform(new Vector4f(0, 0, -0.5f, 1));
+        Vector4f b = inv.transform(new Vector4f(0, 0, 0.5f, 1));
+        if (Math.abs(a.w) < 1e-9 || Math.abs(b.w) < 1e-9) return fallback;
+        Vec3d pa = new Vec3d(a.x / a.w, a.y / a.w, a.z / a.w);
+        Vec3d pb = new Vec3d(b.x / b.w, b.y / b.w, b.z / b.w);
+        Vec3d dir = pb.subtract(pa);
+        if (!Double.isFinite(dir.lengthSquared()) || dir.lengthSquared() < 1e-12) return fallback;
+        dir = dir.normalize();
+        if (dir.dotProduct(look) < 0) dir = dir.multiply(-1);
+        // Punkt des Mittelstrahls, der dem Auge am nächsten ist, dann 0,6 Blöcke nach vorn
+        Vec3d origin = pa.subtract(dir.multiply(pa.dotProduct(dir)));
+        Vec3d p = origin.add(dir.multiply(0.6));
+        if (!Double.isFinite(p.x) || !Double.isFinite(p.y) || !Double.isFinite(p.z) || p.length() > 2) return fallback;
+        Vec3d result = cam.add(p);
+        lastTracer = new TracerDebug(cam, result, fallback, new Matrix4f(FRAME_PROJECTION).mul(ctx.viewMatrix()));
+        return result;
+    }
+
+    /** Letzter Tracer-Anfang (für den automatischen Test): Kamera, neuer und alter Startpunkt, Matrix. */
+    public record TracerDebug(Vec3d cam, Vec3d from, Vec3d naiveFrom, Matrix4f projView) {
+        /** Bildschirmabstand eines Weltpunkts von der Mitte in Pixeln (bei gegebener Fensterhöhe). */
+        public double pixelsFromCenter(Vec3d world, int screenW, int screenH) {
+            Vector4f v = projView.transform(new Vector4f((float) (world.x - cam.x), (float) (world.y - cam.y), (float) (world.z - cam.z), 1));
+            double nx = v.x / v.w;
+            double ny = v.y / v.w;
+            return Math.hypot(nx * screenW / 2.0, ny * screenH / 2.0);
+        }
+    }
+
+    public static volatile TracerDebug lastTracer;
 
     /** Umriss des Kopfes: echte Block-Form, Entity-Box oder ein Standardwürfel. */
     private static Box box(ClientWorld world, HeadEntry h) {

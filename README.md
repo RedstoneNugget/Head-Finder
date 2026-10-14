@@ -28,7 +28,7 @@ Koordinaten in einer Liste, markiert sie und führt dich per Pfeil hin. Gefunden
 
 1. [Fabric Loader](https://fabricmc.net/use/) (≥ 0.19) für Minecraft 1.21.11 installieren.
 2. [Fabric API](https://modrinth.com/mod/fabric-api) in den `mods`-Ordner legen.
-3. `head-finder-1.0.1.jar` in den `mods`-Ordner legen.
+3. `head-finder-1.0.2.jar` in den `mods`-Ordner legen.
 4. Optional: [Mod Menu](https://modrinth.com/mod/modmenu), dann sind die Einstellungen auch über die Mod-Liste erreichbar.
 
 ## Bedienung
