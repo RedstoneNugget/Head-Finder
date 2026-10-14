@@ -1,10 +1,10 @@
 **Hugo SMP Pumpkin Finder 1.0.0** für Minecraft 1.21.11 (Fabric, nur Client). Im Spiel heißt die Mod *Coole Socke 69*.
 
-Findet die versteckten Event-Köpfe auf Hugo SMP: Boxen durch Wände mit Entfernung, Tracer und Pfeil zum nächsten Kopf, Zähler oben am Bildschirm. Rechtsklick auf einen Kopf markiert ihn als gefunden, danach wird er nicht mehr angezeigt. Zurücksetzen mit `/headfinder reset` oder in der Liste (Taste **K**).
+Hilft beim Event-Köpfe-Suchen auf Hugo SMP: erkennt die Event-Köpfe in geladenen Chunks, zeigt ihre Koordinaten in einer Liste (Taste **K**), markiert sie und führt dich per Pfeil hin. Rechtsklick auf einen Kopf hakt ihn ab, danach wird er nicht mehr angezeigt. Zurücksetzen mit `/headfinder reset` oder in der Liste.
 
 ### Installation
 1. [Fabric Loader](https://fabricmc.net/use/) für 1.21.11 und die [Fabric API](https://modrinth.com/mod/fabric-api) installieren
 2. `coole-socke-69-1.0.0.jar` in den `mods`-Ordner legen
-3. Am Spawn herumlaufen: Köpfe in geladenen Chunks werden automatisch markiert
+3. Am Spawn herumlaufen: Köpfe in geladenen Chunks landen automatisch in der Liste
 
-**English:** Finds the hidden event heads on Hugo SMP: boxes through walls with distance, tracer and HUD arrow to the nearest head. Right-click a head to mark it as found (hidden afterwards); reset with `/headfinder reset`. Unofficial, client-side only.
+**English:** Helps you find the event heads on Hugo SMP: detects them in loaded chunks, lists their coordinates, marks them and guides you there with an arrow. Right-click a head to tick it off; reset with `/headfinder reset`. Unofficial, client-side only.

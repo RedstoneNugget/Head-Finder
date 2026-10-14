@@ -56,6 +56,7 @@ public final class HeadCommands {
                         .then(literal("all").executes(HeadCommands::resetAll)))
                 .then(literal("toggle")
                         .executes(c -> toggle(c, "esp"))
+                        .then(literal("markierungen").executes(c -> toggle(c, "esp")))
                         .then(literal("esp").executes(c -> toggle(c, "esp")))
                         .then(literal("tracer").executes(c -> toggle(c, "tracer")))
                         .then(literal("hud").executes(c -> toggle(c, "hud")))
@@ -133,7 +134,7 @@ public final class HeadCommands {
         line.accept(" status – Zähler, Suchprofile, Speicherdatei");
         line.accept(" reset – alle wieder als NICHT gefunden markieren");
         line.accept(" reset all – alles vergessen (auch Positionen)");
-        line.accept(" toggle [esp|tracer|hud|labels|hidefound]");
+        line.accept(" toggle [markierungen|tracer|hud|labels|hidefound]");
         line.accept(" target nearest|clear|<x y z> – Ziel für Tracer/Pfeil");
         line.accept(" found <x y z> / unfound <x y z> – Status von Hand setzen");
         line.accept(" scan – sofort neu scannen, reload – Config neu laden, open – Liste öffnen (Taste K)");
@@ -185,7 +186,7 @@ public final class HeadCommands {
         line.accept("Köpfe: " + store.countFound() + " gefunden / " + store.countDiscovered() + " entdeckt");
         line.accept("Geladene Chunks: " + CooleSocke69Client.scanner().loadedChunkCount() + ", Kopf-Blöcke darin: " + CooleSocke69Client.scanner().lastSkullCount()
                 + ", Scan: " + CooleSocke69Client.scanner().lastIntervalMicros() + " µs, Zeichnen: " + com.coolesocke69.render.HeadRenderer.lastRenderMicros + " µs");
-        line.accept("ESP " + onOff(cfg.espEnabled) + ", Tracer " + cfg.tracerMode.title + ", HUD " + onOff(cfg.hudEnabled)
+        line.accept("Markierungen " + onOff(cfg.espEnabled) + ", Tracer " + cfg.tracerMode.title + ", HUD " + onOff(cfg.hudEnabled)
                 + ", gefundene " + (cfg.hideFound ? "ausgeblendet" : "grün"));
         for (String s : CooleSocke69Client.matcher().describe()) line.accept("Sucht: " + s);
         if (!CooleSocke69Client.matcher().hasCriteria()) line.accept("Achtung: kein aktives Suchprofil!");
@@ -228,7 +229,7 @@ public final class HeadCommands {
             }
             default -> {
                 cfg.espEnabled = !cfg.espEnabled;
-                msg = "Markierungen (ESP) " + onOff(cfg.espEnabled);
+                msg = "Markierungen " + onOff(cfg.espEnabled);
             }
         }
         CooleSocke69Client.onConfigEdited();

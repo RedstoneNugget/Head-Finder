@@ -72,7 +72,7 @@ public class ConfigScreen extends ScrollScreen {
 
         ModConfig c = cfg();
         header("Anzeige");
-        toggle("Markierungen (ESP)", () -> c.espEnabled, v -> c.espEnabled = v, "Farbige Box durch Wände um jeden Kopf");
+        toggle("Markierungen", () -> c.espEnabled, v -> c.espEnabled = v, "Farbige Box um jeden Kopf, auch hinter Blöcken sichtbar");
         toggle("Labels mit Entfernung", () -> c.labelsEnabled, v -> c.labelsEnabled = v, null);
         cycleTracer();
         toggle("HUD oben", () -> c.hudEnabled, v -> c.hudEnabled = v, "Zähler, Pfeil und Entfernung zum nächsten Kopf");

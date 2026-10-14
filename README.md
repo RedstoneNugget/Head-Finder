@@ -4,23 +4,22 @@
 
 **Minecraft 1.21.11 · Fabric · Java 21 · nur Client** · von **redstone_nugget** · Mod-Name im Spiel: *Coole Socke 69*
 
-Findet die versteckten Event-Köpfe auf **Hugo SMP**: Jeder Kopf in den geladenen Chunks wird erkannt,
-mit einer farbigen Box durch Wände markiert und mit Entfernung beschriftet. Ein Pfeil oben am Bildschirm
-zeigt zum nächsten Kopf. Rechtsklick auf einen Kopf → gilt als gefunden und wird nicht mehr markiert.
-Der Fortschritt wird pro Server gespeichert.
+Hilft dir beim Event-Köpfe-Suchen auf **Hugo SMP**: Erkennt die Event-Köpfe in geladenen Chunks, zeigt ihre
+Koordinaten in einer Liste, markiert sie und führt dich per Pfeil hin. Gefundene Köpfe werden abgehakt
+(Rechtsklick) und danach nicht mehr angezeigt. Der Fortschritt wird pro Server gespeichert.
 
 <p align="center">
-  <img src="docs/markierungen.png" width="49%" alt="Markierungen durch eine Wand, HUD mit Pfeil">
-  <img src="docs/200-koepfe.png" width="49%" alt="200 Köpfe von oben, Tracer zum nächsten">
+  <img src="docs/liste.png" width="49%" alt="Liste aller entdeckten Köpfe mit Koordinaten (Taste K)">
+  <img src="docs/befehle.png" width="49%" alt="Koordinaten im Chat mit /headfinder list">
 </p>
 <p align="center">
-  <img src="docs/liste.png" width="49%" alt="Liste aller entdeckten Köpfe (Taste K)">
+  <img src="docs/markierungen.png" width="49%" alt="Markierungen und Pfeil zum nächsten Kopf">
   <img src="docs/einstellungen.png" width="49%" alt="Einstellungen">
 </p>
 
-> **English:** Finds the hidden event heads on Hugo SMP. Every matching player head in loaded chunks gets a
-> box through walls, a distance label and an optional tracer; a HUD arrow points to the nearest one.
-> Right-click a head to mark it as found (it is hidden afterwards), reset any time. Progress is saved per server.
+> **English:** Helps you find the event heads on Hugo SMP: detects them in loaded chunks, lists their
+> coordinates, marks them and guides you there with an arrow. Right-click a head to tick it off (it is hidden
+> afterwards), reset any time. Progress is saved per server.
 
 > **Inoffiziell.** Nicht von Hugo SMP. Die Mod ist rein clientseitig, sendet keine eigenen Pakete und nutzt
 > nur Daten, die dein Client sowieso vom Server bekommt. Prüf trotzdem selbst die Regeln des Servers.
@@ -58,8 +57,8 @@ gespeichert und in der Liste, auch wenn du weit weg bist.
 | `/headfinder list [anzahl]` | Nächste Köpfe im Chat (Koordinaten anklicken = kopieren) |
 | `/headfinder reset` | Alle wieder als **nicht gefunden** markieren (Positionen bleiben) |
 | `/headfinder reset all` | Alles vergessen, auch die Positionen |
-| `/headfinder toggle [esp\|tracer\|hud\|labels\|hidefound]` | Anzeige umschalten |
-| `/headfinder target nearest\|clear\|<x y z>` | Ziel für Tracer und Pfeil |
+| `/headfinder toggle [markierungen\|tracer\|hud\|labels\|hidefound]` | Anzeige umschalten |
+| `/headfinder target nearest\|clear\|<x y z>` | Ziel für Linie und Pfeil |
 | `/headfinder found <x y z>` / `unfound <x y z>` | Status von Hand setzen |
 | `/headfinder status`, `scan`, `reload`, `open` | Infos, neu scannen, Config neu laden, Liste öffnen |
 
@@ -78,11 +77,11 @@ Kopf wird über Dimension + Blockposition identifiziert. Weitere Suchprofile (Na
 lassen sich in den Einstellungen oder in `config/coole_socke_69/config.json` eintragen.
 
 Gescannt werden nur die Block-Entities der Chunks (beim Laden und einmal pro Sekunde), nicht jeder Block.
-Getestet mit 200 Köpfen: Zeichnen ca. 0,04 ms pro Bild, Scan unter 0,5 ms pro Sekunde.
+Getestet mit 200 Köpfen: Anzeige ca. 0,04 ms pro Bild, Scan unter 0,5 ms pro Sekunde.
 
 ## Einstellungen
 
-Markierungen, Labels, Tracer (aus / nächster / alle), HUD und dessen Abstand oben, gefundene ausblenden
+Markierungen (auch hinter Blöcken sichtbar), Labels, Linie zum Kopf (aus / nächster / alle), HUD und dessen Abstand oben, gefundene ausblenden
 oder grün anzeigen, Farben (offen, gefunden, Ziel), Reichweite für Boxen und Labels, Label-Größe,
 Rechts-/Linksklick bzw. Verschwinden = gefunden, Items & Rahmen erkennen, UUID-Vergleich, Scan-Intervall
 und die Suchprofile.

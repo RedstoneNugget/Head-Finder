@@ -3,7 +3,7 @@
   "id": "coole_socke_69",
   "version": "${version}",
   "name": "Coole Socke 69",
-  "description": "Findet versteckte Event-Köpfe (Spielerköpfe mit bestimmtem Profil) in den geladenen Chunks, markiert sie durch Wände, merkt sich gefundene Köpfe pro Server und zeigt den Weg zum nächsten. Rein clientseitig.",
+  "description": "Erkennt die Event-Köpfe in geladenen Chunks, zeigt ihre Koordinaten in einer Liste, markiert sie und führt dich per Pfeil hin. Gefundene Köpfe werden abgehakt. Rein clientseitig.",
   "authors": ["redstone_nugget"],
   "license": "MIT",
   "environment": "client",
