@@ -56,7 +56,7 @@ jar {
 fabricApi {
     configureTests {
         createSourceSet = true
-        modId = 'coole_socke_69-gametest'
+        modId = 'head_finder-gametest'
         enableGameTests = false
         enableClientGameTests = true
         eula = true
@@ -69,7 +69,7 @@ tasks.matching { it.name == 'runClientGameTest' }.configureEach {
     // Netzwerk-Synchronisierer des Testframeworks aus sein.
     jvmArgs '-Dfabric.client.gametest.disableNetworkSynchronizer=true'
     if (project.hasProperty('only')) {
-        jvmArgs "-Dcoolesocke.only=${project.property('only')}"
+        jvmArgs "-Dheadfinder.only=${project.property('only')}"
     }
 }
 

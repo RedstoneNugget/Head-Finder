@@ -25,6 +25,6 @@ jobs:
       - name: GitHub-Release veröffentlichen
         uses: softprops/action-gh-release@v2
         with:
-          name: Hugo SMP Pumpkin Finder ${{ github.ref_name }}
+          name: Head Finder ${{ github.ref_name }}
           body_path: .github/release-notes.md
-          files: build/libs/coole-socke-69-*.jar
+          files: build/libs/head-finder-*.jar

@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "id": "coole_socke_69-gametest",
+  "id": "head_finder-gametest",
   "version": "1.0.0",
-  "name": "Coole Socke 69 GameTest",
+  "name": "Head Finder GameTest",
   "environment": "*",
   "entrypoints": {
-    "fabric-client-gametest": ["com.coolesocke69.test.CooleSockeClientGameTest"]
+    "fabric-client-gametest": ["com.headfinder.test.HeadFinderClientGameTest"]
   },
   "depends": {
-    "coole_socke_69": "*"
+    "head_finder": "*"
   }
 }

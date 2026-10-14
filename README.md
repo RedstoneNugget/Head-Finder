@@ -1,8 +1,8 @@
-# Hugo SMP Pumpkin Finder
+# Head Finder
 
 ![Minecraft 1.21.11](https://img.shields.io/badge/Minecraft-1.21.11-62B47A) ![Fabric](https://img.shields.io/badge/Loader-Fabric-DBD0B4) ![Java 21](https://img.shields.io/badge/Java-21-ED8B00) ![Nur Client](https://img.shields.io/badge/Umgebung-nur%20Client-5865F2) ![Lizenz MIT](https://img.shields.io/badge/Lizenz-MIT-blue)
 
-**Minecraft 1.21.11 · Fabric · Java 21 · nur Client** · von **redstone_nugget** · Mod-Name im Spiel: *Coole Socke 69*
+**Minecraft 1.21.11 · Fabric · Java 21 · nur Client** · von **redstone_nugget**
 
 Hilft dir beim Event-Köpfe-Suchen auf **Hugo SMP**: Erkennt die Event-Köpfe in geladenen Chunks, zeigt ihre
 Koordinaten in einer Liste, markiert sie und führt dich per Pfeil hin. Gefundene Köpfe werden abgehakt
@@ -22,13 +22,13 @@ Koordinaten in einer Liste, markiert sie und führt dich per Pfeil hin. Gefunden
 
 ## Download
 
-[**GitHub Releases**](https://github.com/RedstoneNugget/Hugo-SMP-Pumpkin-Finder/releases)
+[**GitHub Releases**](https://github.com/RedstoneNugget/Head-Finder/releases)
 
 ## Installation
 
 1. [Fabric Loader](https://fabricmc.net/use/) (≥ 0.19) für Minecraft 1.21.11 installieren.
 2. [Fabric API](https://modrinth.com/mod/fabric-api) in den `mods`-Ordner legen.
-3. `coole-socke-69-1.0.0.jar` in den `mods`-Ordner legen.
+3. `head-finder-1.0.1.jar` in den `mods`-Ordner legen.
 4. Optional: [Mod Menu](https://modrinth.com/mod/modmenu), dann sind die Einstellungen auch über die Mod-Liste erreichbar.
 
 ## Bedienung
@@ -70,7 +70,7 @@ mit diesem Profil:
 
 Die Profil-UUID ist bei jedem Event-Kopf anders und wird deshalb standardmäßig **nicht** verglichen; jeder
 Kopf wird über Dimension + Blockposition identifiziert. Weitere Suchprofile (Name, Textur, optional UUIDs)
-lassen sich in den Einstellungen oder in `config/coole_socke_69/config.json` eintragen.
+lassen sich in den Einstellungen oder in `config/head_finder/config.json` eintragen.
 
 Gescannt werden nur die Block-Entities der Chunks (beim Laden und einmal pro Sekunde), nicht jeder Block.
 Getestet mit 200 Köpfen: Anzeige ca. 0,04 ms pro Bild, Scan unter 0,5 ms pro Sekunde.
@@ -83,8 +83,8 @@ Rechts-/Linksklick bzw. Verschwinden = gefunden, Items & Rahmen erkennen, UUID-V
 und die Suchprofile.
 
 Dateien:
-- `config/coole_socke_69/config.json` – Einstellungen
-- `config/coole_socke_69/found/<server>.json` – entdeckte und gefundene Köpfe pro Server (Dimension pro Eintrag)
+- `config/head_finder/config.json` – Einstellungen
+- `config/head_finder/found/<server>.json` – entdeckte und gefundene Köpfe pro Server (Dimension pro Eintrag)
 
 ## Selbst bauen
 
