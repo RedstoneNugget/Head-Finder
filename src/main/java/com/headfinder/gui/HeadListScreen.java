@@ -58,7 +58,7 @@ public class HeadListScreen extends ScrollScreen {
     private int tickCount;
 
     public HeadListScreen(Screen parent) {
-        super(Text.literal("Head Finder – Event-Köpfe"), parent);
+        super(Text.literal("Head Finder – Köpfe"), parent);
     }
 
     @Override

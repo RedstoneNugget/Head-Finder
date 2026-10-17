@@ -192,7 +192,7 @@ public final class HeadRenderer {
 
     private static void label(HeadEntry h, Box b, int color, double dist, boolean target, Vec3d cam, Camera camera, ModConfig cfg) {
         Vec3d anchor = new Vec3d((b.minX + b.maxX) / 2, b.maxY + 0.35, (b.minZ + b.maxZ) / 2);
-        String title = h.found ? "✔ Gefunden" : (target ? "Ziel" : "Event-Kopf");
+        String title = h.found ? "✔ Gefunden" : (target ? "Ziel" : "Kopf");
         if (h.kind != HeadEntry.Kind.BLOCK) title += " (" + h.kind.title + ")";
         String text = title + " · " + Math.round(dist) + " m";
 

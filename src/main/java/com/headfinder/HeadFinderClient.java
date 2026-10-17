@@ -33,7 +33,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
- * Head Finder – rein clientseitige Fabric-Mod (Mod-ID "head_finder"), findet Event-Köpfe.
+ * Head Finder – rein clientseitige Fabric-Mod (Mod-ID "head_finder"), findet Köpfe.
  *
  * Es gibt keine Server-Komponente und keine eigenen Netzwerkpakete: ausgewertet werden nur Chunks,
  * Block-Entities und Entities, die der Client vom Server sowieso bekommt.

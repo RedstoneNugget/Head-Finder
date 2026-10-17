@@ -5,7 +5,7 @@ import net.minecraft.util.math.Vec3d;
 
 /**
  * Ein entdeckter Kopf. Identifiziert über Dimension + Blockposition (nicht über die Profil-UUID,
- * die bei jedem Event-Kopf anders ist).
+ * die bei jedem Kopf anders ist).
  *
  * Die nicht-transienten Felder werden pro Server in config/head_finder/found/&lt;server&gt;.json gespeichert.
  */

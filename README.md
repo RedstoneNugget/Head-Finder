@@ -4,7 +4,7 @@
 
 **Minecraft 1.21.11 · Fabric · Java 21 · nur Client** · von **redstone_nugget**
 
-Hilft dir beim Event-Köpfe-Suchen auf **Hugo SMP**: Erkennt die Event-Köpfe in geladenen Chunks, zeigt ihre
+Hilft dir beim Köpfe-Suchen auf **Donut SMP**: Erkennt die Köpfe in geladenen Chunks, zeigt ihre
 Koordinaten in einer Liste, markiert sie und führt dich per Pfeil hin. Gefundene Köpfe werden abgehakt
 (Rechtsklick) und danach nicht mehr angezeigt. Der Fortschritt wird pro Server gespeichert.
 
@@ -17,7 +17,7 @@ Koordinaten in einer Liste, markiert sie und führt dich per Pfeil hin. Gefunden
   <img src="docs/einstellungen.png" width="49%" alt="Einstellungen">
 </p>
 
-> **Inoffiziell.** Nicht von Hugo SMP. Die Mod ist rein clientseitig, sendet keine eigenen Pakete und nutzt
+> **Inoffiziell.** Nicht von Donut SMP. Die Mod ist rein clientseitig, sendet keine eigenen Pakete und nutzt
 > nur Daten, die dein Client sowieso vom Server bekommt. Prüf trotzdem selbst die Regeln des Servers.
 
 ## Download
@@ -68,7 +68,7 @@ mit diesem Profil:
 - Name `FindEventHead` **oder**
 - Textur `http://textures.minecraft.net/texture/3d8c1f399f9a74ce148300cb6fa79fbc13ba44f9a52c25ce9e452b49f5b40a10`
 
-Die Profil-UUID ist bei jedem Event-Kopf anders und wird deshalb standardmäßig **nicht** verglichen; jeder
+Die Profil-UUID ist bei jedem Kopf anders und wird deshalb standardmäßig **nicht** verglichen; jeder
 Kopf wird über Dimension + Blockposition identifiziert. Weitere Suchprofile (Name, Textur, optional UUIDs)
 lassen sich in den Einstellungen oder in `config/head_finder/config.json` eintragen.
 

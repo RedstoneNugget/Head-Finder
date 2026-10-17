@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Sucht Event-Köpfe in den Daten, die der Client ohnehin hat:
+ * Sucht Köpfe in den Daten, die der Client ohnehin hat:
  *
  *  - Beim Laden eines Chunks werden nur dessen Block-Entities geprüft (kein Durchlaufen aller Blöcke).
  *  - Alle {@code rescanIntervalTicks} werden die Block-Entities aller geladenen Chunks erneut geprüft
@@ -226,7 +226,7 @@ public final class HeadScanner {
         if (!HeadFinderClient.config().notifyNewHeads) return;
         MinecraftClient mc = MinecraftClient.getInstance();
         if (mc.inGameHud != null) {
-            mc.inGameHud.setOverlayMessage(Text.literal("Neuer Event-Kopf entdeckt: " + pos.getX() + " " + pos.getY() + " " + pos.getZ())
+            mc.inGameHud.setOverlayMessage(Text.literal("Neuer Kopf entdeckt: " + pos.getX() + " " + pos.getY() + " " + pos.getZ())
                     .formatted(Formatting.GOLD), false);
         }
     }

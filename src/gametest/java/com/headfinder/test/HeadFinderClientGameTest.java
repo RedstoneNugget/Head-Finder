@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * Automatischer In-Game-Test: gradlew runClientGameTest
  *
- * Startet einen echten Dedicated Server (wie Hugo SMP), platziert Event-Köpfe per Befehl und prüft:
+ * Startet einen echten Dedicated Server (wie Donut SMP), platziert Köpfe per Befehl und prüft:
  * Erkennung (Textur ODER Name, verschiedene UUIDs), Items/Rahmen, Rechtsklick, Verschwinden,
  * Speicherung über Neuverbindung und Reset. Screenshots: build/run/clientGameTest/screenshots.
  */
@@ -150,7 +150,7 @@ public class HeadFinderClientGameTest implements FabricClientGameTest {
         }
     }
 
-    // ---------------------------------------------------------------- Phase 2: 200 Köpfe (Event hat ~100)
+    // ---------------------------------------------------------------- Phase 2: 200 Köpfe (mehr als in der Praxis vorhanden)
 
     // ---------------------------------------------------------------- Phase 3: Tracer beim Laufen (View Bobbing)
 

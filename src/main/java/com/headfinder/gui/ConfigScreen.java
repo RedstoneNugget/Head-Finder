@@ -97,7 +97,7 @@ public class ConfigScreen extends ScrollScreen {
                 "Ist ein bekannter Kopf-Block im geladenen Chunk weg, gilt er als eingesammelt");
         toggle("Items & Rahmen erkennen", () -> c.detectItems, v -> c.detectItems = v, "Köpfe als Item am Boden und in Item-Frames");
         toggle("UUID vergleichen", () -> c.matchUuid, v -> c.matchUuid = v,
-                "Zusätzlich die UUIDs der Suchprofile vergleichen (meist unnötig – jeder Event-Kopf hat eine andere UUID)");
+                "Zusätzlich die UUIDs der Suchprofile vergleichen (meist unnötig – jeder Kopf hat eine andere UUID)");
         slider("Scan-Intervall", 5, 100, 1, () -> c.rescanIntervalTicks, v -> c.rescanIntervalTicks = (int) Math.round(v),
                 v -> String.format(Locale.ROOT, "%.2f s", v / 20.0), "Wie oft die geladenen Chunks erneut geprüft werden");
 

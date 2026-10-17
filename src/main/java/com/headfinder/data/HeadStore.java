@@ -269,7 +269,7 @@ public final class HeadStore {
         return ModConfig.dir().resolve("found").resolve(safeFileName(serverKey) + ".json");
     }
 
-    /** Servername → sicherer Dateiname (z. B. "mp_hugosmp.net" oder "sp_Neue Welt"). */
+    /** Servername → sicherer Dateiname (z. B. "mp_donutsmp.net" oder "sp_Neue Welt"). */
     static String safeFileName(String key) {
         String s = key == null ? "unknown" : key.toLowerCase(Locale.ROOT).replaceAll("[^a-z0-9._-]+", "_");
         if (s.isBlank()) s = "unknown";

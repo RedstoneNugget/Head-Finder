@@ -3,7 +3,7 @@
   "id": "head_finder",
   "version": "${version}",
   "name": "Head Finder",
-  "description": "Erkennt die Event-Köpfe in geladenen Chunks, zeigt ihre Koordinaten in einer Liste, markiert sie und führt dich per Pfeil hin. Gefundene Köpfe werden abgehakt. Rein clientseitig.",
+  "description": "Erkennt die Köpfe in geladenen Chunks, zeigt ihre Koordinaten in einer Liste, markiert sie und führt dich per Pfeil hin. Gefundene Köpfe werden abgehakt. Rein clientseitig.",
   "authors": ["redstone_nugget"],
   "license": "MIT",
   "environment": "client",
