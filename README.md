@@ -4,7 +4,7 @@
 
 **Minecraft 1.21.11 · Fabric · Java 21 · nur Client** · von **redstone_nugget**
 
-Hilft dir beim Event-Köpfe-Suchen auf **Hugo SMP**: Erkennt die Event-Köpfe in geladenen Chunks, zeigt ihre
+Hilft dir beim Event-Köpfe-Suchen auf **Donut SMP**: Erkennt die Event-Köpfe in geladenen Chunks, zeigt ihre
 Koordinaten in einer Liste, markiert sie und führt dich per Pfeil hin. Gefundene Köpfe werden abgehakt
 (Rechtsklick) und danach nicht mehr angezeigt. Der Fortschritt wird pro Server gespeichert.
 
